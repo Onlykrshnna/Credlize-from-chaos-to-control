@@ -536,8 +536,8 @@ export default function StoryFlow() {
             className="story-section"
             style={{
               background: idx % 2 === 0
-                ? 'linear-gradient(135deg, #050505 0%, #0A0A0A 100%)'
-                : 'linear-gradient(135deg, #0A0A0A 0%, #050505 100%)',
+                ? 'rgba(5,5,5,0.82)'
+                : 'rgba(8,8,12,0.78)',
               position: 'relative',
               minHeight: '100vh',
               display: 'flex',
@@ -551,8 +551,8 @@ export default function StoryFlow() {
                 position: 'absolute',
                 inset: 0,
                 background: isOdd
-                  ? 'linear-gradient(270deg, rgba(5,5,5,0.96) 50%, rgba(5,5,5,0.7) 100%)'
-                  : 'linear-gradient(90deg, rgba(5,5,5,0.96) 50%, rgba(5,5,5,0.7) 100%)',
+                  ? 'linear-gradient(270deg, rgba(5,5,5,0.88) 50%, rgba(5,5,5,0.45) 100%)'
+                  : 'linear-gradient(90deg, rgba(5,5,5,0.88) 50%, rgba(5,5,5,0.45) 100%)',
                 pointerEvents: 'none',
               }}
             />

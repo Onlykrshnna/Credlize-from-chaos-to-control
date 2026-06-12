@@ -1,71 +1,95 @@
 import { useState, useEffect } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-
-  const [theme, setTheme] = useState('dark')
+  const [scrolled, setScrolled]   = useState(false)
+  const [menuOpen, setMenuOpen]   = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close menu on resize to desktop
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+    const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false) }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   return (
-    <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-      <a href="/" className="nav-logo">
-        <svg className="nav-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="14" fill="var(--bg-primary)" stroke="var(--orange-primary)" strokeWidth="1"/>
-          <path d="M16 5 L23 9.5 L23 22.5 L16 27 L9 22.5 L9 9.5 Z" fill="none" stroke="var(--orange-primary)" strokeWidth="1.2"/>
-          <circle cx="16" cy="16" r="3.5" fill="var(--orange-primary)"/>
-          <line x1="16" y1="5" x2="16" y2="12.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-          <line x1="23" y1="9.5" x2="18.5" y2="13.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-          <line x1="23" y1="22.5" x2="18.5" y2="18.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-          <line x1="16" y1="27" x2="16" y2="19.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-          <line x1="9" y1="22.5" x2="13.5" y2="18.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-          <line x1="9" y1="9.5" x2="13.5" y2="13.5" stroke="var(--orange-primary)" strokeWidth="0.8" opacity="0.5"/>
-        </svg>
-        <span className="nav-logo-text">Credlize</span>
-      </a>
+    <>
+      {/* ── Floating pill navbar ── */}
+      <header className={`nav-wrapper ${scrolled ? 'scrolled' : ''}`}>
+        <nav className="nav-pill" role="navigation" aria-label="Main navigation">
 
-      <ul className="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#ai-paper">AI Paper</a></li>
-        <li><a href="#distributor">Distributors</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-      </ul>
+          {/* Logo */}
+          <a href="/" className="nav-logo" aria-label="Credlize home">
+            <svg className="nav-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="14" fill="#050505" stroke="#FF6B00" strokeWidth="1"/>
+              <path d="M16 5 L23 9.5 L23 22.5 L16 27 L9 22.5 L9 9.5 Z" fill="none" stroke="#FF6B00" strokeWidth="1.2"/>
+              <circle cx="16" cy="16" r="3.5" fill="#FF6B00"/>
+              <line x1="16" y1="5"  x2="16" y2="12.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="23" y1="9.5" x2="18.5" y2="13.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="23" y1="22.5" x2="18.5" y2="18.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="16" y1="27" x2="16" y2="19.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="9"  y1="22.5" x2="13.5" y2="18.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="9"  y1="9.5" x2="13.5" y2="13.5" stroke="#FF6B00" strokeWidth="0.8" opacity="0.5"/>
+            </svg>
+            <span className="nav-logo-text">Credlize</span>
+          </a>
 
-      <div className="nav-cta">
-        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-          {theme === 'dark' ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="5" />
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          {/* Desktop links */}
+          <ul className="nav-links" role="list">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#ai-paper">AI Paper</a></li>
+            <li><a href="#distributor">Distributors</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+
+          {/* Desktop CTA */}
+          <div className="nav-cta">
+            <a href="#demo" className="btn-secondary nav-btn-sm">
+              <span>Watch Tour</span>
+            </a>
+            <a href="#demo" className="btn-primary nav-btn-sm" id="nav-book-demo">
+              <span>Book Demo</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className={`nav-hamburger ${menuOpen ? 'open' : ''}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+        </nav>
+      </header>
+
+      {/* ── Mobile slide-down menu ── */}
+      <div className={`nav-mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
+        <ul>
+          <li><a href="#features"    onClick={() => setMenuOpen(false)}>Features</a></li>
+          <li><a href="#ai-paper"    onClick={() => setMenuOpen(false)}>AI Paper</a></li>
+          <li><a href="#distributor" onClick={() => setMenuOpen(false)}>Distributors</a></li>
+          <li><a href="#pricing"     onClick={() => setMenuOpen(false)}>Pricing</a></li>
+        </ul>
+        <div className="nav-mobile-cta">
+          <a href="#demo" className="btn-secondary" onClick={() => setMenuOpen(false)}>Watch Tour</a>
+          <a href="#demo" className="btn-primary"   onClick={() => setMenuOpen(false)}>
+            <span>Book Demo</span>
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          )}
-        </button>
-        <a href="#demo" className="btn-secondary" style={{ padding: '10px 20px', fontSize: '0.8rem' }}>
-          <span>Watch Tour</span>
-        </a>
-        <a href="#demo" className="btn-primary" style={{ padding: '10px 20px', fontSize: '0.8rem' }}>
-          <span>Book Demo</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
+          </a>
+        </div>
       </div>
-    </nav>
+    </>
   )
 }

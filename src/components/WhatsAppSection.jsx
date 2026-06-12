@@ -87,12 +87,7 @@ export default function WhatsAppSection() {
       }} />
 
       <div className="container">
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '5rem',
-          alignItems: 'center',
-        }}>
+        <div className="whatsapp-section-grid">
           {/* Messages visualization */}
           <div>
             {/* WhatsApp-style header */}
@@ -210,7 +205,7 @@ export default function WhatsAppSection() {
               distributor network.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div className="whatsapp-features-list">
               {[
                 { emoji: '✅', text: 'Order approved notifications' },
                 { emoji: '📄', text: 'Invoice generated & shared' },
@@ -218,16 +213,7 @@ export default function WhatsAppSection() {
                 { emoji: '📦', text: 'Back in stock alerts' },
                 { emoji: '🔁', text: 'Automated reorder nudges' },
               ].map(item => (
-                <div key={item.text} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '0.75rem 1rem',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 10,
-                  fontSize: '0.9375rem',
-                }}>
+                <div key={item.text} className="whatsapp-feature-card">
                   <span>{item.emoji}</span>
                   <span style={{ color: 'var(--text-secondary)' }}>{item.text}</span>
                 </div>

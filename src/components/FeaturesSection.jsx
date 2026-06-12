@@ -153,7 +153,7 @@ export default function FeaturesSection() {
         <div className="section-label">Platform Features</div>
         <div className="section-divider" />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '4rem' }}>
+        <div className="features-header-grid">
           <div>
             <h2 style={{
               fontFamily: 'var(--font-display)',
@@ -167,12 +167,7 @@ export default function FeaturesSection() {
             </h2>
           </div>
           <div>
-            <p style={{
-              fontSize: '1.125rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.7,
-              paddingTop: '0.5rem',
-            }}>
+            <p className="features-header-desc">
               Four interconnected modules that form a complete operating 
               system for manufacturer–distributor trade. Not disconnected tools 
               — one living platform.

@@ -16,12 +16,7 @@ export default function PhoneSection() {
       }}
     >
       <div className="container">
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '5rem',
-          alignItems: 'center',
-        }}>
+        <div className="phone-section-grid">
           {/* Text side */}
           <div>
             <div className="section-label">Distributor PWA</div>
@@ -48,22 +43,14 @@ export default function PhoneSection() {
               WhatsApp deep links — all without downloading anything.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="phone-features-list">
               {[
                 { icon: '📊', title: 'Live Stock Bars', desc: 'Visual, color-coded stock levels updated in real time' },
                 { icon: '🔁', title: 'Repeat Last Order', desc: 'Clone previous order in one tap — no typing needed' },
                 { icon: '💳', title: 'UPI Payment', desc: 'Pay invoices directly via UPI from the app' },
                 { icon: '💬', title: 'WhatsApp Deep Links', desc: 'Contact sales rep instantly via WhatsApp' },
               ].map(feature => (
-                <div key={feature.title} style={{
-                  display: 'flex',
-                  gap: '1rem',
-                  padding: '1rem',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 12,
-                  transition: 'all 0.3s',
-                }}>
+                <div key={feature.title} className="phone-feature-card">
                   <div style={{
                     width: 40, height: 40,
                     background: 'rgba(255,107,0,0.1)',
@@ -87,8 +74,8 @@ export default function PhoneSection() {
           </div>
 
           {/* Phone mockup */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ position: 'relative' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div className="phone-frame">
               {/* Glow behind phone */}
               <div style={{
                 position: 'absolute',
